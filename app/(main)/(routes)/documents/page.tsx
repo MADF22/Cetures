@@ -6,10 +6,12 @@ import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { Clock8, File, ChevronLeft, ChevronRight } from "lucide-react";
+import { Clock8, File } from "lucide-react";
 import Flickity from "flickity";
 import "flickity/css/flickity.css";
 import { useEffect, useRef } from "react";
+
+// Hapus deklarasi module di sini dan pindahkan ke file terpisah
 
 export default function DocumentPage() {
   const { user } = useUser();
@@ -20,9 +22,19 @@ export default function DocumentPage() {
   const flickityRef = useRef<Flickity | null>(null);
 
   useEffect(() => {
-    if (carouselRef.current && documents && documents.length > 0) {
+    if (!carouselRef.current || !documents?.length) return;
+
+    let carousel: Flickity | null = null;
+    const handleHover = (opacity: string) => {
+      const buttons = carouselRef.current?.querySelectorAll(".flickity-button");
+      buttons?.forEach((button) => {
+        (button as HTMLElement).style.opacity = opacity;
+      });
+    };
+
+    const initializeCarousel = () => {
       if (!flickityRef.current) {
-        flickityRef.current = new Flickity(carouselRef.current, {
+        carousel = new Flickity(carouselRef.current, {
           cellAlign: "left",
           contain: true,
           groupCells: 4,
@@ -40,33 +52,26 @@ export default function DocumentPage() {
           },
         });
 
-        const buttons =
-          carouselRef.current.querySelectorAll(".flickity-button");
-        buttons.forEach((button) => {
-          (button as HTMLElement).style.opacity = "0";
-          (button as HTMLElement).style.transition = "opacity 0.3s ease";
-        });
-
-        // Show/hide on hover
-        carouselRef.current.addEventListener("mouseenter", () => {
-          buttons.forEach((button) => {
-            (button as HTMLElement).style.opacity = "1";
-          });
-        });
-
-        carouselRef.current.addEventListener("mouseleave", () => {
-          buttons.forEach((button) => {
-            (button as HTMLElement).style.opacity = "0";
-          });
-        });
+        carouselRef.current.addEventListener("mouseenter", () =>
+          handleHover("1"),
+        );
+        carouselRef.current.addEventListener("mouseleave", () =>
+          handleHover("0"),
+        );
+        flickityRef.current = carousel;
       }
+    };
 
-      flickityRef.current.reloadCells();
-      flickityRef.current.resize();
-    }
+    initializeCarousel();
 
     return () => {
       if (flickityRef.current) {
+        carouselRef.current?.removeEventListener("mouseenter", () =>
+          handleHover("1"),
+        );
+        carouselRef.current?.removeEventListener("mouseleave", () =>
+          handleHover("0"),
+        );
         flickityRef.current.destroy();
         flickityRef.current = null;
       }
