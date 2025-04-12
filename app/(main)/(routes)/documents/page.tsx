@@ -34,7 +34,11 @@ export default function DocumentPage() {
 
     const initializeCarousel = () => {
       if (!flickityRef.current) {
-        carousel = new Flickity(carouselRef.current, {
+        // Tambahkan type assertion dan null check
+        if (!carouselRef.current) return;
+
+        carousel = new Flickity(carouselRef.current as Element, {
+          // atau gunakan non-null assertion
           cellAlign: "left",
           contain: true,
           groupCells: 4,
@@ -52,16 +56,17 @@ export default function DocumentPage() {
           },
         });
 
-        carouselRef.current.addEventListener("mouseenter", () =>
+        // Tambahkan optional chaining untuk event listeners
+        carouselRef.current?.addEventListener("mouseenter", () =>
           handleHover("1"),
         );
-        carouselRef.current.addEventListener("mouseleave", () =>
+        carouselRef.current?.addEventListener("mouseleave", () =>
           handleHover("0"),
         );
+
         flickityRef.current = carousel;
       }
     };
-
     initializeCarousel();
 
     return () => {

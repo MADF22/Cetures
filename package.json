@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "scripts": {
-  "build": "npm install --legacy-peer-deps && next build"
-},
+      "build": "npm install --legacy-peer-deps && next build"
+    },
     "start": "next start",
     "lint": "next lint"
   },
@@ -50,6 +50,7 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
+    "@types/flickity": "^2.2.11",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
