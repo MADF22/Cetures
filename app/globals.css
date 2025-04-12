@@ -1,4 +1,10 @@
 @import url('https://fonts.cdnfonts.com/css/segoe-ui-4');
+
+/* app/globals.css */
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -97,74 +103,13 @@ body,
 
 }
 
-.flickity-carousel {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
+
+
+.swiper-button-prev,
+.swiper-button-next {
+  @apply after:text-[24px] after:md:text-[32px] hover:after:text-[28px] hover:after:md:text-[36px] transition-all;
 }
 
-.flickity-slide {
-  width: calc(25% - 12px);
-  margin-right: 12px;
-}
-
-/* Navigation buttons */
-.flickity-button {
-  background: white;
-  border: none;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 9999;
-  background: rgb(255, 255, 255);
-  background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%);
-}
-
-.flickity-carousel:hover .flickity-button {
-  opacity: 1;
-}
-
-.element-items .flickity-prev-next-button {
-  width: 20 px;
-  height: 20px;
-}
-
-.flickity-button:disabled {
-  opacity: 0.3 !important;
-  cursor: not-allowed;
-}
-
-.flickity-button.previous {
-  left: 10px;
-}
-
-.flickity-button.next {
-  right: 10px;
-}
-
-.flickity-button-icon {
-  color: #333;
-  width: 10px;
-  height: 10px;
-}
-
-.gradient-overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100px;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.flickity-button svg {
-  width: 15px;
-  height: 15px;
-  color: #333;
+.swiper-button-disabled {
+  @apply !opacity-20 !cursor-default hover:after:text-[24px] hover:after:md:text-[32px];
 }

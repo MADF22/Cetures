@@ -7,93 +7,28 @@ import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Clock8, File } from "lucide-react";
-import Flickity from "flickity";
-import "flickity/css/flickity.css";
 import { useEffect, useRef } from "react";
-
-// Hapus deklarasi module di sini dan pindahkan ke file terpisah
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import SwiperCore from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
 
 export default function DocumentPage() {
   const { user } = useUser();
   const router = useRouter();
   const create = useMutation(api.documents.create);
   const documents = useQuery(api.documents.getAll);
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const flickityRef = useRef<Flickity | null>(null);
-
-  useEffect(() => {
-    if (!carouselRef.current || !documents?.length) return;
-
-    let carousel: Flickity | null = null;
-    const handleHover = (opacity: string) => {
-      const buttons = carouselRef.current?.querySelectorAll(".flickity-button");
-      buttons?.forEach((button) => {
-        (button as HTMLElement).style.opacity = opacity;
-      });
-    };
-
-    const initializeCarousel = () => {
-      if (!flickityRef.current) {
-        // Tambahkan type assertion dan null check
-        if (!carouselRef.current) return;
-
-        carousel = new Flickity(carouselRef.current as Element, {
-          // atau gunakan non-null assertion
-          cellAlign: "left",
-          contain: true,
-          groupCells: 4,
-          pageDots: false,
-          prevNextButtons: true,
-          wrapAround: true,
-          autoPlay: false,
-          arrowShape: {
-            x0: 10,
-            x1: 60,
-            y1: 50,
-            x2: 65,
-            y2: 45,
-            x3: 20,
-          },
-        });
-
-        // Tambahkan optional chaining untuk event listeners
-        carouselRef.current?.addEventListener("mouseenter", () =>
-          handleHover("1"),
-        );
-        carouselRef.current?.addEventListener("mouseleave", () =>
-          handleHover("0"),
-        );
-
-        flickityRef.current = carousel;
-      }
-    };
-    initializeCarousel();
-
-    return () => {
-      if (flickityRef.current) {
-        carouselRef.current?.removeEventListener("mouseenter", () =>
-          handleHover("1"),
-        );
-        carouselRef.current?.removeEventListener("mouseleave", () =>
-          handleHover("0"),
-        );
-        flickityRef.current.destroy();
-        flickityRef.current = null;
-      }
-    };
-  }, [documents]);
+  const swiperRef = useRef<SwiperCore | null>(null);
+  const navigationPrevRef = useRef<HTMLDivElement>(null);
+  const navigationNextRef = useRef<HTMLDivElement>(null);
 
   const getGreetingMessage = () => {
     const hour = new Date().getHours();
-    if (hour >= 5 && hour < 12) {
-      return "Good Morning";
-    } else if (hour >= 12 && hour < 15) {
-      return "Good Afternoon";
-    } else if (hour >= 15 && hour < 18) {
-      return "Good Evening";
-    } else {
-      return "Good Night";
-    }
+    if (hour >= 5 && hour < 12) return "Good Morning";
+    if (hour >= 12 && hour < 15) return "Good Afternoon";
+    if (hour >= 15 && hour < 18) return "Good Evening";
+    return "Good Night";
   };
 
   const onCreate = () => {
@@ -113,34 +48,70 @@ export default function DocumentPage() {
       <h2 className="font-bold text-3xl md:text-4xl text-center">
         {getGreetingMessage()}, {user?.firstName}
       </h2>
+
       <div className="mt-6 w-full max-w-4xl relative">
         <div className="text-sm font-medium mb-4 flex items-center space-x-2">
           <Clock8 className="w-5" />
           <h5>Recently visited</h5>
         </div>
-        <div className="relative">
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white via-white/70 to-transparent z-10 pointer-events-none hidden md:block" />
-          <div ref={carouselRef} className="element-items flickity-carousel">
-            {documents?.map((doc) => (
-              <div
-                key={doc._id}
-                className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-4 border rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-all flickity-slide"
-                onClick={() => router.push(`/documents/${doc._id}`)}>
-                <File />
-                <h4 className="font-bold text-lg truncate">{doc.title}</h4>
-                <div className="flex items-center gap-x-2 mt-2">
-                  <Avatar className="h-6 w-6">
-                    <AvatarImage src={user?.imageUrl} />
-                  </Avatar>
-                  <p className="text-sm font-normal truncate">
-                    {user?.fullName}&apos;s
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
 
-          {/* Right Gradient */}
+        <div className="relative group">
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white via-white/70 to-transparent z-10 pointer-events-none hidden md:block" />
+
+          <Swiper
+            modules={[Navigation]}
+            navigation={{
+              prevEl: navigationPrevRef.current,
+              nextEl: navigationNextRef.current,
+            }}
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+              // Workaround untuk navigation elements yang belum ter-render
+              setTimeout(() => {
+                swiper.navigation.init();
+                swiper.navigation.update();
+              });
+            }}
+            spaceBetween={16}
+            slidesPerView={"auto"}
+            breakpoints={{
+              640: { slidesPerGroup: 2 },
+              768: { slidesPerGroup: 3 },
+              1024: { slidesPerGroup: 4 },
+            }}
+            className="!overflow-visible">
+            {documents?.map((doc) => (
+              <SwiperSlide
+                key={doc._id}
+                className="!w-[calc(100%-16px)] sm:!w-[calc(50%-16px)] md:!w-[calc(33.333%-16px)] lg:!w-[calc(25%-16px)]">
+                <div
+                  className="p-4 border rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
+                  onClick={() => router.push(`/documents/${doc._id}`)}>
+                  <File />
+                  <h4 className="font-bold text-lg truncate">{doc.title}</h4>
+                  <div className="flex items-center gap-x-2 mt-2">
+                    <Avatar className="h-6 w-6">
+                      <AvatarImage src={user?.imageUrl} />
+                    </Avatar>
+                    <p className="text-sm font-normal truncate">
+                      {user?.fullName}&apos;s
+                    </p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          {/* Navigation Buttons */}
+          <div
+            ref={navigationPrevRef}
+            className="swiper-button-prev !-left-4 !text-gray-600 hover:!text-gray-900 dark:!text-gray-400 dark:hover:!text-gray-100 !transition-colors"
+          />
+          <div
+            ref={navigationNextRef}
+            className="swiper-button-next !-right-4 !text-gray-600 hover:!text-gray-900 dark:!text-gray-400 dark:hover:!text-gray-100 !transition-colors"
+          />
+
           <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white via-white/70 to-transparent z-10 pointer-events-none hidden md:block" />
         </div>
       </div>
