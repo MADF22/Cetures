@@ -13,8 +13,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "typeRoots": ["node_modules/@types", "types"],
-    "skipLibCheck": true,
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "types": ["flickity"],
     "plugins": [
       {
         "name": "next"
