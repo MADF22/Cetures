@@ -9,6 +9,7 @@ import { Title } from "@/components/main/title";
 import { Banner } from "@/components/main/banner";
 import { Menu } from "@/components/main/menu";
 import { Publish } from "@/components/main/publish";
+import { ModeToggle } from "@/components/mode-toggle";
 
 interface NavbarProps {
   isCollapsed: boolean;
@@ -50,6 +51,7 @@ export const Navbar = ({ isCollapsed, onResetWidth }: NavbarProps) => {
           <div className="flex items-center gap-x-2">
             <Publish initialData={document} />
             <Menu documentId={document._id} />
+            <ModeToggle />
           </div>
         </div>
       </nav>

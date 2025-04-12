@@ -8,6 +8,7 @@ import {
   Search,
   Settings,
   Trash,
+  House,
 } from "lucide-react";
 import React, {
   ElementRef,
@@ -71,7 +72,10 @@ export const Navigation = () => {
     if (sidebarRef.current && navbarRef.current) {
       sidebarRef.current.style.width = `${newWidth}px`;
       navbarRef.current.style.setProperty("left", `${newWidth}px`);
-      navbarRef.current.style.setProperty("width", `calc(100% - ${newWidth}px`);
+      navbarRef.current.style.setProperty(
+        "width",
+        `calc(100% - ${newWidth}px)`,
+      );
     }
   };
 
@@ -81,6 +85,9 @@ export const Navigation = () => {
     document.removeEventListener("mouseup", handleMouseUp);
   };
 
+  const goToDocuments = () => {
+    router.push("/documents");
+  };
   const resetWidth = useCallback(() => {
     if (sidebarRef.current && navbarRef.current) {
       setIsCollapsed(false);
@@ -90,7 +97,7 @@ export const Navigation = () => {
       navbarRef.current.style.setProperty("left", isMobile ? "100%" : "240px");
       navbarRef.current.style.setProperty(
         "width",
-        isMobile ? "0" : "calc(100% - 240px",
+        isMobile ? "0" : "calc(100% - 240px)",
       );
 
       setTimeout(() => setIsResetting(false), 300);
@@ -123,7 +130,8 @@ export const Navigation = () => {
   };
 
   useEffect(() => {
-    isMobile ? collapse() : resetWidth();
+    if (isMobile) collapse();
+    else resetWidth();
   }, [isMobile, resetWidth]);
 
   useEffect(() => {
@@ -135,56 +143,86 @@ export const Navigation = () => {
       <aside
         ref={sidebarRef}
         className={cn(
-          "group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col z-[99999]",
+          "group/sidebar h-full bg-secondary overflow-y-none relative flex w-60 flex-col z-[99999]",
           isResetting && "transition-all ease-in-out duration-300",
           isMobile && "w-0",
-        )}
-      >
+        )}>
+        {/* Collapse button */}
         <div
-          role="botton"
+          role="button"
           onClick={collapse}
           className={cn(
-            "h-6 w-6 text-muted-foreground rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 absolute top-3 right-2 opacity-0 group-hover/sidebar:opacity-100 transition",
+            "h-6 w-6 mt-2 text-muted-foreground rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-600 absolute top-3 right-2 opacity-0 group-hover/sidebar:opacity-100 transition",
             isMobile && "opacity-100",
-          )}
-        >
+          )}>
           <ChevronLeft className="h-6 w-6" />
         </div>
-        <div>
-          <UserItem />
-          <Item onClick={search.onOpen} label="Search" icon={Search} isSearch />
-          <Item onClick={settings.onOpen} label="Settings" icon={Settings} />
-          <Item onClick={handleCreate} label="New Page" icon={PlusCircle} />
-        </div>
-        <div className="mt-4">
-          <DocumentList />
-          <Item onClick={handleCreate} label="Add a Page" icon={Plus} />
-          <Popover>
-            <PopoverTrigger className="w-full mt-4">
-              <Item label="Trash" icon={Trash} />
-            </PopoverTrigger>
-            <PopoverContent
-              className="p-0 w-72"
-              side={isMobile ? "bottom" : "right"}
-            >
-              <TrashBox />
-            </PopoverContent>
-          </Popover>
-        </div>
+
+        {/* User and main items */}
+        {!isCollapsed && (
+          <>
+            <div className="mt-2">
+              <UserItem />
+              <div className="mt-3 space-y-1">
+                <Item onClick={goToDocuments} label="Home" icon={House} />
+                <Item
+                  onClick={search.onOpen}
+                  label="Search"
+                  icon={Search}
+                  isSearch
+                />
+                <Item
+                  onClick={settings.onOpen}
+                  label="Settings"
+                  icon={Settings}
+                />
+                <Item
+                  onClick={handleCreate}
+                  label="New Page"
+                  icon={PlusCircle}
+                />
+              </div>
+            </div>
+
+            {/* Private section */}
+            <div className="mt-4">
+              <h6 className="text-sm ml-4 group min-h-[27px] text-sm py-1 pr-3 w-full flex items-center text-muted-foreground font-medium">
+                Pages
+              </h6>
+              <DocumentList />
+              <Item onClick={handleCreate} label="Add a Page" icon={Plus} />
+
+              {/* Trash popover */}
+              <Popover>
+                <PopoverTrigger className="w-full mt-4">
+                  <Item label="Trash" icon={Trash} />
+                </PopoverTrigger>
+                <PopoverContent
+                  className="p-0 w-72"
+                  side={isMobile ? "bottom" : "right"}>
+                  <TrashBox />
+                </PopoverContent>
+              </Popover>
+            </div>
+          </>
+        )}
+
+        {/* Resize handle */}
         <div
           onMouseDown={handleMouseDown}
           onClick={resetWidth}
           className="opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0"
         />
       </aside>
+
+      {/* Navbar */}
       <div
         ref={navbarRef}
         className={cn(
           "absolute top-0 z-[99999] left-60 w-[calc(100%-240px)]",
           isResetting && "transition-all ease-in-out duration-300",
           isMobile && "left-0 w-full",
-        )}
-      >
+        )}>
         {params.documentId ? (
           <Navbar isCollapsed={isCollapsed} onResetWidth={resetWidth} />
         ) : (

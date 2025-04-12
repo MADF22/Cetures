@@ -16,8 +16,8 @@ export default function MainLayout({
 
   if (isLoading) {
     return (
-      <div className="h-full flex items-center justify-center">
-        <Spinner size="lg" />
+      <div className="h-full flex items-center">
+        {/* <Spinner size="lg" /> */}
       </div>
     );
   }

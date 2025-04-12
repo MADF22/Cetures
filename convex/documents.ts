@@ -154,7 +154,9 @@ export const remove = mutation({
     return document;
   },
 });
-
+export const getAll = query(async ({ db }) => {
+  return await db.query("documents").collect();
+});
 export const getSearch = query({
   handler: async (ctx) => {
     const identity = await ctx.auth.getUserIdentity();

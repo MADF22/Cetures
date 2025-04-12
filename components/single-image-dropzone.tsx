@@ -136,18 +136,21 @@ const SingleImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
               width,
               height,
             },
-          })}
-        >
+          })}>
           {/* Main File Input */}
           <input ref={ref} {...getInputProps()} />
 
           {imageUrl ? (
             // Image Preview
-            <Image
-              className="h-full w-full rounded-md object-cover"
-              src={imageUrl}
-              alt={acceptedFiles[0]?.name}
-            />
+            <div className="relative h-full w-full">
+              <Image
+                className="rounded-md object-cover"
+                src={imageUrl}
+                alt={acceptedFiles[0]?.name}
+                fill // Gunakan fill untuk gambar responsif
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </div>
           ) : (
             // Upload Icon
             <div className="flex flex-col items-center justify-center text-xs text-gray-400">
@@ -165,8 +168,7 @@ const SingleImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
               onClick={(e) => {
                 e.stopPropagation();
                 void onChange?.(undefined);
-              }}
-            >
+              }}>
               <div className="flex h-5 w-5 items-center justify-center rounded-md border border-solid border-gray-500 bg-white transition-all duration-300 hover:h-6 hover:w-6 dark:border-gray-400 dark:bg-black">
                 <X
                   className="text-gray-500 dark:text-gray-400"

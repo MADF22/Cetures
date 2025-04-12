@@ -1,3 +1,4 @@
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
@@ -16,6 +17,9 @@ module.exports = {
       },
     },
     extend: {
+      FontFamily:{
+        segoe: ['Segoe UI, sans-serif'],   
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

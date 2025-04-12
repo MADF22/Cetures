@@ -1,3 +1,4 @@
+@import url('https://fonts.cdnfonts.com/css/segoe-ui-4');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,6 +7,8 @@ html,
 body,
 :root {
   height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+
 }
 
 @layer base {
@@ -80,4 +83,88 @@ body,
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.cta_elements {
+  clip-path: polygon(0 0, 70% 3%, 70% 13%, 100% 12%, 100% 84%, 40% 100%, 39.9% 90%, 0 81%);
+}
+
+
+/* Custom Flickity styles */
+
+.element-items {
+  position: relative;
+
+}
+
+.flickity-carousel {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.flickity-slide {
+  width: calc(25% - 12px);
+  margin-right: 12px;
+}
+
+/* Navigation buttons */
+.flickity-button {
+  background: white;
+  border: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%);
+}
+
+.flickity-carousel:hover .flickity-button {
+  opacity: 1;
+}
+
+.element-items .flickity-prev-next-button {
+  width: 20 px;
+  height: 20px;
+}
+
+.flickity-button:disabled {
+  opacity: 0.3 !important;
+  cursor: not-allowed;
+}
+
+.flickity-button.previous {
+  left: 10px;
+}
+
+.flickity-button.next {
+  right: 10px;
+}
+
+.flickity-button-icon {
+  color: #333;
+  width: 10px;
+  height: 10px;
+}
+
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.flickity-button svg {
+  width: 15px;
+  height: 15px;
+  color: #333;
 }
