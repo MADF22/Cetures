@@ -4,11 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "scripts": {
-      "build": "npm install --legacy-peer-deps && next build"
-    },
-    "start": "next start",
-    "lint": "next lint"
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
   },
   "dependencies": {
     "@blocknote/core": "^0.23.2",
