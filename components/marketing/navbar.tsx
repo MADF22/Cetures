@@ -63,7 +63,7 @@ export const Navbar = () => {
             <SignInButton mode="modal">
               <Button
                 variant="outline"
-                className="font-normal text-gray-950 border border-gray-950 rounded-full"
+                className="font-normal text-gray-950 border border-gray-950 rounded-full dark:border-white dark:text-white"
                 size="sm">
                 Login
               </Button>
@@ -88,7 +88,10 @@ export const Navbar = () => {
       <div className="md:hidden flex items-center gap-x-4">
         {!isAuthenticated && !isLoading && (
           <SignInButton mode="modal">
-            <Button variant="outline" className="dark:text-white" size="sm">
+            <Button
+              variant="outline"
+              className="font-normal text-gray-950 border border-gray-950 rounded-full dark:border-white dark:text-white"
+              size="sm">
               Login
             </Button>
           </SignInButton>

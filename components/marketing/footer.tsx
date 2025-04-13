@@ -3,17 +3,17 @@ import { Button } from "@/components/ui/button";
 
 export const Footer = () => {
   return (
-    <section className="py-10 my-10 bg-gray-50 sm:pt-16 lg:pt-24 rounded-3xl z-50">
-      <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-6xl">
+    <section className="py-10 my-10 bg-gray-50 sm:pt-16 lg:pt-24 rounded-3xl z-50 dark:bg-[#121212] ">
+      <div className="px-10 mx-auto sm:px-8 lg:px-8 max-w-7xl">
         <div className="grid grid-cols-2 md:col-span-3 lg:grid-cols-6 gap-y-16 gap-x-12">
           <div className="col-span-2 md:col-span-3 lg:col-span-2 lg:pr-8">
             <Logo />
 
-            <p className="text-sm leading-relaxed text-gray-600 mt-7">
+            <p className="text-sm leading-relaxed text-gray-600 mt-7 dark:text-white">
               We do not sell or share your personal information
             </p>
 
-            <ul className="flex items-center space-x-3 mt-9">
+            <ul className="flex items-center space-x-3 mt-9 dark:text-white">
               <li>
                 <a
                   href="#"
@@ -82,7 +82,7 @@ export const Footer = () => {
           </div>
 
           <div>
-            <p className="text-sm font-medium tracking-widest text-gray-800 uppercase">
+            <p className="text-sm font-medium tracking-widest text-gray-800 uppercase dark:text-white">
               Company
             </p>
 
@@ -91,7 +91,7 @@ export const Footer = () => {
                 <a
                   href="#"
                   title=""
-                  className="flex text-sm text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600">
+                  className="flex text-sm text-black transition-all duration-200 dark:text-white">
                   {" "}
                   Feature
                 </a>
@@ -101,7 +101,7 @@ export const Footer = () => {
                 <a
                   href="#"
                   title=""
-                  className="flex text-sm text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600">
+                  className="flex text-sm text-black transition-all duration-200 dark:text-white">
                   {" "}
                   Solutions
                 </a>
@@ -111,7 +111,7 @@ export const Footer = () => {
                 <a
                   href="#"
                   title=""
-                  className="flex text-sm text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600">
+                  className="flex text-sm text-black transition-all duration-200 dark:text-white">
                   {" "}
                   Resource
                 </a>
@@ -121,7 +121,7 @@ export const Footer = () => {
                 <a
                   href="#"
                   title=""
-                  className="flex text-sm text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600">
+                  className="flex text-sm text-black transition-all duration-200 dark:text-white">
                   {" "}
                   Pricing
                 </a>
@@ -130,7 +130,7 @@ export const Footer = () => {
           </div>
 
           <div>
-            <p className="text-sm font-medium tracking-widest text-gray-800 uppercase">
+            <p className="text-sm font-medium tracking-widest text-gray-800 uppercase dark:text-white">
               Help
             </p>
 
@@ -139,7 +139,7 @@ export const Footer = () => {
                 <a
                   href="#"
                   title=""
-                  className="flex text-sm text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600">
+                  className="flex text-sm text-black transition-all duration-200 dark:text-white">
                   {" "}
                   Customer Support{" "}
                 </a>
@@ -149,7 +149,7 @@ export const Footer = () => {
                 <a
                   href="#"
                   title=""
-                  className="flex text-sm text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600">
+                  className="flex text-sm text-black transition-all duration-200 dark:text-white">
                   {" "}
                   Delivery Details{" "}
                 </a>
@@ -159,7 +159,7 @@ export const Footer = () => {
                 <a
                   href="#"
                   title=""
-                  className="flex text-sm text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600">
+                  className="flex text-sm text-black transition-all duration-200 dark:text-white">
                   {" "}
                   Terms & Conditions{" "}
                 </a>
@@ -169,7 +169,7 @@ export const Footer = () => {
                 <a
                   href="#"
                   title=""
-                  className="flex text-sm text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600">
+                  className="flex text-sm text-black transition-all duration-200 dark:text-white">
                   {" "}
                   Privacy Policy{" "}
                 </a>
@@ -178,7 +178,7 @@ export const Footer = () => {
           </div>
 
           <div className="col-span-2 md:col-span-1 lg:col-span-2 lg:pl-8">
-            <p className="text-sm font-medium tracking-widest text-gray-800 uppercase">
+            <p className="text-sm font-medium tracking-widest text-gray-800 uppercase dark:text-white">
               Subscribe to newsletter
             </p>
 
@@ -196,7 +196,7 @@ export const Footer = () => {
 
               <button
                 type="submit"
-                className="inline-flex items-center justify-center px-6 py-4 mt-3 font-medium text-white transition-all 8uration-200 bg-gray-900 rounded-md hover:bg-gray-800 focus:bg-gray-800">
+                className="inline-flex items-center justify-center px-6 py-4 mt-3 font-medium text-white transition-all 8uration-200 bg-gray-900 rounded-md hover:bg-gray-800 focus:bg-gray-800 dark:bg-[#181818] dark:text-white">
                 Subscribe
               </button>
             </form>
@@ -205,7 +205,7 @@ export const Footer = () => {
 
         <hr className="mt-16 mb-10 border-gray-200" />
 
-        <p className="text-sm text-center text-gray-600">
+        <p className="text-sm text-center text-gray-600 dark:text-white">
           © Copyright 2025, All Rights Reserved by Fertilis
         </p>
       </div>

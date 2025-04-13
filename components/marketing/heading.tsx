@@ -12,10 +12,10 @@ export const Heading = () => {
   const { isAuthenticated, isLoading } = useConvexAuth();
   return (
     <div className="max-w-3xl space-y-4">
-      <h1 className="text-6xl sm:text-5xl md:text-6xl font-bold font-poppins">
+      <h1 className="text-6xl sm:text-2xl md:text-6xl font-bold font-poppins">
         The Happier Workspace
       </h1>
-      <h3 className="text-base sm:text-xl md:text-2xl font-light text-gray-600">
+      <h3 className="text-base sm:text-xl md:text-2xl font-light text-gray-600 dark:text-white">
         Fertilis is the connected workspace where <br />
         better, faster work happens
       </h3>
