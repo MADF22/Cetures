@@ -88,7 +88,7 @@ export const Navbar = () => {
       <div className="md:hidden flex items-center gap-x-4">
         {!isAuthenticated && !isLoading && (
           <SignInButton mode="modal">
-            <Button variant="outline" size="sm">
+            <Button variant="outline" className="dark:text-white" size="sm">
               Login
             </Button>
           </SignInButton>
