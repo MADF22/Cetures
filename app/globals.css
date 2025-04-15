@@ -116,3 +116,13 @@ body,
 .swiper-button-disabled {
   @apply !opacity-20 !cursor-default hover:after:text-[24px] hover:after:md:text-[32px];
 }
+
+@media only screen and (max-width: 600px) {
+  .headscreen {
+    padding: 45px 0;
+  }
+
+  .heading-text {
+    font-size: 27px;
+  }
+}

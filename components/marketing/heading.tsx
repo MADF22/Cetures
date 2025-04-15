@@ -11,11 +11,11 @@ import Image from "next/image";
 export const Heading = () => {
   const { isAuthenticated, isLoading } = useConvexAuth();
   return (
-    <div className="max-w-3xl space-y-4">
-      <h1 className="lg:text-6xl sm:text-2xl md:text-4xl font-bold font-poppins">
+    <div className="max-w-3xl headscreen space-y-4">
+      <h1 className="text-xl heading-text sm:text-2xl md:text-3xl lg:text-4xl xl:text-6xl font-bold font-poppins">
         The Happier Workspace
       </h1>
-      <h3 className="text-base sm:text-xl md:text-2xl font-light text-gray-600 dark:text-white">
+      <h3 className="text-base  sm:text-xl md:text-2xl font-light text-gray-600 dark:text-white">
         Fertilis is the connected workspace where <br />
         better, faster work happens
       </h3>
