@@ -41,16 +41,16 @@ export const Navbar = () => {
 
       {/* Desktop Navigation */}
       <div className="hidden md:flex items-center gap-x-6">
-        <Link href="/home" className="hover:underline text-sm font-light">
+        <Link href="/home" className=" text-sm font-light">
           Feature
         </Link>
-        <Link href="/about" className="hover:underline text-sm font-light">
+        <Link href="/about" className=" text-sm font-light">
           Solutions
         </Link>
-        <Link href="/services" className="hover:underline text-sm font-light">
+        <Link href="/services" className=" text-sm font-light">
           Resource
         </Link>
-        <Link href="/contact" className="hover:underline text-sm font-light">
+        <Link href="/contact" className=" text-sm font-light">
           Pricing
         </Link>
       </div>
@@ -103,16 +103,16 @@ export const Navbar = () => {
 
       {menuOpen && (
         <div className="absolute top-full left-0 w-full h-96 bg-background p-4 border-b flex flex-col gap-y-1 md:hidden">
-          <Link href="/home" className="block py-2 hover:underline">
+          <Link href="/home" className="block py-2 ">
             Home
           </Link>
-          <Link href="/about" className="block py-2 hover:underline">
+          <Link href="/about" className="block py-2 ">
             About
           </Link>
-          <Link href="/services" className="block py-2 hover:underline">
+          <Link href="/services" className="block py-2 ">
             Services
           </Link>
-          <Link href="/contact" className="block py-2 hover:underline">
+          <Link href="/contact" className="block py-2 ">
             Contact
           </Link>
           {isLoading && <Spinner />}

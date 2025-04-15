@@ -14,7 +14,10 @@ body,
 :root {
   height: 100%;
   font-family: 'Segoe UI', sans-serif;
+}
 
+.cl-internal-1dauvpw {
+  display: none;
 }
 
 @layer base {

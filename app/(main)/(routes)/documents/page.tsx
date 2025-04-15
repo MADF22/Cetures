@@ -56,7 +56,7 @@ export default function DocumentPage() {
         </div>
 
         <div className="relative group">
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white via-white/70 to-transparent z-10 pointer-events-none hidden md:block" />
+          <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-white via-white/70 to-transparent z-10 pointer-events-none hidden md:block" />
 
           <Swiper
             modules={[Navigation]}
@@ -112,7 +112,7 @@ export default function DocumentPage() {
             className="swiper-button-next !-right-4 !text-gray-600 hover:!text-gray-900 dark:!text-gray-400 dark:hover:!text-gray-100 !transition-colors"
           />
 
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white via-white/70 to-transparent z-10 pointer-events-none hidden md:block" />
+          <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-white via-white/70 to-transparent z-10 pointer-events-none hidden md:block" />
         </div>
       </div>
     </div>
